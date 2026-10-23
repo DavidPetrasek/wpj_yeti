@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Yetinder | Best of Yeti{% endblock %}
+
+{% block main %}
+    <section class="mx-auto max-w-4xl px-5 py-12 sm:px-8">
+        <p class="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-cyan-300">Najděte svého horského parťáka</p>
+        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl">Yetinder</h1>
+        <p class="mt-4 max-w-2xl leading-7 text-slate-400">Seznamte se s náhodným Yetim. Dejte mu palec nahoru nebo dolů a pokračujte k dalšímu.</p>
+        <div class="mt-8">
+            {{ component('yetinder', {yetiId: yetiId}) }}
+        </div>
+    </section>
+{% endblock %}

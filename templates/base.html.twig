@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="cs" 
-class="
-{% block html_start_class %}
-{% endblock %}">
+<html lang="cs" class="{% block html_start_class %}min-h-full bg-slate-950{% endblock %}">
 	
 	{% block head_start %}
 		<head>
@@ -37,16 +34,29 @@ class="
 	
 	
 	{% block body_start %}
-    	<body class="{% block body_start_class %}grid grid-cols-1 grid-rows-[auto_auto_auto]{% endblock %}"
+    	<body class="{% block body_start_class %}grid min-h-screen grid-cols-1 grid-rows-[auto_1fr_auto] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-800 via-slate-950 to-slate-950 text-slate-100 antialiased{% endblock %}"
         {% block body_start_stimulus %}{% endblock %}
         >
 	{% endblock %}
 	
 		{% block header_start %}
-			<header class="{% block header_start_class %}row-start-1{% endblock %}" {% block header_start_stimulus %}{% endblock %}>
+			<header class="{% block header_start_class %}row-start-1 border-b border-white/10 bg-slate-950/70{% endblock %}" {% block header_start_stimulus %}{% endblock %}>
 	    {% endblock %}
 	
-    	{% block header %}{% endblock %}
+    	{% block header %}
+            <div class="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+                <a href="{{ path('hlavni_stranka') }}" class="flex items-center gap-3">
+                    <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-cyan-300 text-xl" aria-hidden="true">❄</span>
+                    <span>
+                        <span class="block text-sm font-bold tracking-wide text-white">YETI CLUB</span>
+                        <span class="block text-xs text-slate-500">Seznamte se s legendami hor</span>
+                    </span>
+                </a>
+                <nav aria-label="Hlavní navigace">
+                    {{ knp_menu_render('hlavni_navigace') }}
+                </nav>
+            </div>
+        {% endblock %}
     	</header>
     	
     	
@@ -65,7 +75,11 @@ class="
 			<footer class="{% block footer_start_class %}row-start-3{% endblock %}" {% block footer_start_stimulus %}{% endblock %}>
 	    {% endblock %}
     
-        {% block footer %}{% endblock %}
+        {% block footer %}
+            <div class="border-t border-white/10 px-5 py-6 text-center text-xs text-slate-500">
+                Best of Yeti <span aria-hidden="true">·</span> Z hor s láskou
+            </div>
+        {% endblock %}
         </footer>
 
         {% block body_end %}{% endblock %}
