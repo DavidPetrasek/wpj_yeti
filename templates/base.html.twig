@@ -1,24 +1,73 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+
+<html lang="cs" 
+class="
+{% block html_start_class %}
+{% endblock %}">
+	
+	{% block head_start %}
+		<head>
+	{% endblock %}
+	
+	{% block head %}
+    	<meta charset="UTF-8">
+		<meta name="description" content="Yeti">
+        
+        {% do csp_nonce('style') %} {# Turbo Drive https://github.com/hotwired/turbo/issues/1366 #}
+        {# Vite https://github.com/vitejs/vite/pull/16052 #}
+        {# Turbo Drive https://github.com/hotwired/turbo/pull/501 #}
+        <meta name="csp-nonce" property="csp-nonce" nonce="{{ csp_nonce('script') }}">
+
+		<meta name="turbo-refresh-method" content="morph">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       
+		<title>{% block title %}{% endblock %}</title>
+        
         {% block stylesheets %}
+            {{ vite_entry_link_tags('app') }}
         {% endblock %}
-
         {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            {{ vite_entry_script_tags('app', {attr: {nonce: csp_nonce('script')}}) }}
         {% endblock %}
+        
+	{% endblock %}
+	
+	{% block head_end %}{% endblock %}
+	</head>
+	
+	
+	{% block body_start %}
+    	<body class="{% block body_start_class %}grid grid-cols-1 grid-rows-[auto_auto_auto]{% endblock %}"
+        {% block body_start_stimulus %}{% endblock %}
+        >
+	{% endblock %}
+	
+		{% block header_start %}
+			<header class="{% block header_start_class %}row-start-1{% endblock %}" {% block header_start_stimulus %}{% endblock %}>
+	    {% endblock %}
+	
+    	{% block header %}{% endblock %}
+    	</header>
+    	
+    	
+    	{% block main_start %}
+			<main id="hlavni_obsah" class="{% block main_start_class %}row-start-2{% endblock %}" {% block main_start_stimulus %}{% endblock %}>
+	    {% endblock %}
+    
+        {% block main %}{% endblock %}
+        
+        {% block main_end %}
+			</main>
+	    {% endblock %}
+        
+        
+        {% block footer_start %}
+			<footer class="{% block footer_start_class %}row-start-3{% endblock %}" {% block footer_start_stimulus %}{% endblock %}>
+	    {% endblock %}
+    
+        {% block footer %}{% endblock %}
+        </footer>
 
-        {% set frankenphp_hot_reload = app.request.server.get('FRANKENPHP_HOT_RELOAD') %}
-        {% if frankenphp_hot_reload %}
-        <meta name="frankenphp-hot-reload:url" content="{{ frankenphp_hot_reload }}">
-        <script src="https://cdn.jsdelivr.net/npm/idiomorph"></script>
-        <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
-        {% endif %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
+        {% block body_end %}{% endblock %}
     </body>
 </html>

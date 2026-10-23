@@ -1,0 +1,10 @@
+wpj_yeti.dev.cz {
+    bind 127.0.0.15
+	tls internal
+    root public/
+    php_server {
+        try_files {path} index.php
+        root public/
+        resolve_root_symlink false
+    }
+}

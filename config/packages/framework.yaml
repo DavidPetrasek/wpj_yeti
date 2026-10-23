@@ -3,10 +3,17 @@ framework:
     secret: '%env(APP_SECRET)%'
 
     # Note that the session will be started ONLY if you read or write from it.
-    session: true
+    session: 
+        enabled: true
+        cookie_samesite: 'lax'  # hodnota 'strict' způsobí, že nefunguje reset hesla apod...
+        cookie_secure: true
+        cookie_httponly: true
 
     #esi: true
     #fragments: true
+
+    assets:
+        version_strategy: 'Pentatrion\ViteBundle\Asset\ViteAssetVersionStrategy'
 
 when@test:
     framework:
