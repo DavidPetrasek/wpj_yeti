@@ -19,24 +19,7 @@ final class StatistikaHodnoceniService
      */
     public function mesicniPrehled(int $pocetMesicu = 12): array
     {
-        $mesice = [];
-
-        foreach ($this->hodnoceniRepository->findBy([], ['datumHodnoceni' => 'DESC']) as $hodnoceni) 
-        {
-            $mesic = $hodnoceni->getDatumHodnoceni()->format('Y-m');
-            $mesice[$mesic] ??= ['pocet' => 0, 'soucet' => 0];
-            ++$mesice[$mesic]['pocet'];
-            $mesice[$mesic]['soucet'] += $hodnoceni->getHodnota();
-        }
-
-        $prehled = [];
-
-        foreach (array_slice($mesice, 0, $pocetMesicu, true) as $mesic => $udaje) 
-        {
-            $prehled[] = new MesicniStatistika($mesic, $udaje['pocet'], $udaje['soucet']);
-        }
-
-        return $prehled;
+        return $this->hodnoceniRepository->najdiMesicniStatistiky($pocetMesicu);
     }
 
     public function pocetYeti(): int
