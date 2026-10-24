@@ -12,4 +12,11 @@ final readonly class YetiPrehled
         public int $hodnoceniPocet,
     ) 
     {}
+
+    public function getHodnoceniProcenta(): ?float
+    {
+        if (0 === $this->hodnoceniPocet) return null;
+
+        return ($this->hodnoceniPrumer + 1) * 50;
+    }
 }

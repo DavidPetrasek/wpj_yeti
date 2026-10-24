@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% import 'macros/hodnoceni.html.twig' as hodnoceni %}
 
 {% block title %}Best of Yeti{% endblock %}
 
@@ -40,7 +41,7 @@
                                     <td class="px-6 py-4">{{ prehled.yeti.vaha }} kg</td>
                                     <td class="px-6 py-4">{{ prehled.yeti.bydliste }}</td>
                                     <td class="px-6 py-4">
-                                        <span class="font-semibold text-amber-200">★ {{ prehled.hodnoceniPrumer|number_format(2, ',', ' ') }}</span>
+                                        {{ hodnoceni.procenta(prehled.hodnoceniProcenta) }}
                                         <span class="ml-1 text-xs text-slate-500">({{ prehled.hodnoceniPocet }})</span>
                                     </td>
                                 </tr>

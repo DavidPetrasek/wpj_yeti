@@ -1,0 +1,18 @@
+{% macro procenta(procenta) %}
+    
+    {% if procenta is null %}
+        
+        <span class="text-slate-500">—</span>
+
+    {% else %}
+
+        {% set zobrazenaProcenta = procenta|round %}
+        {% set barva = zobrazenaProcenta <= 15 ? 'text-red-400' : (zobrazenaProcenta <= 35 ? 'text-orange-400' : (zobrazenaProcenta <= 60 ? 'text-yellow-300' : (zobrazenaProcenta <= 80 ? 'text-lime-300' : 'text-emerald-300'))) %}
+        <span class="inline-flex items-center gap-1 font-semibold">
+            {{ zobrazenaProcenta }}%
+            <span class="{{ barva }}">★</span>
+        </span>
+
+    {% endif %}
+
+{% endmacro %}

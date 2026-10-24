@@ -17,4 +17,11 @@ final readonly class MesicniStatistika
 
         return $this->hodnoceniSoucet / $this->hodnoceniPocet;
     }
+
+    public function getHodnoceniProcenta(): ?float
+    {
+        if (0 === $this->hodnoceniPocet) return null;
+
+        return ($this->getHodnoceniPrumer() + 1) * 50;
+    }
 }

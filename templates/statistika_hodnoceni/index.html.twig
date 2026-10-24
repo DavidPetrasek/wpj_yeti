@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% import 'macros/hodnoceni.html.twig' as hodnoceni %}
 
 {% block title %}Statistika hodnocení | Best of Yeti{% endblock %}
 
@@ -35,7 +36,6 @@
                             <tr>
                                 <th scope="col" class="px-6 py-4 font-medium">Měsíc</th>
                                 <th scope="col" class="px-6 py-4 font-medium">Počet hodnocení</th>
-                                <th scope="col" class="px-6 py-4 font-medium">Součet hlasů</th>
                                 <th scope="col" class="px-6 py-4 font-medium">Průměr</th>
                             </tr>
                         </thead>
@@ -45,8 +45,7 @@
                                 <tr>
                                     <th scope="row" class="px-6 py-4 font-medium text-white">{{ mp.mesic }}</th>
                                     <td class="px-6 py-4">{{ mp.hodnoceniPocet }}</td>
-                                    <td class="px-6 py-4">{{ mp.hodnoceniSoucet > 0 ? '+' : '' }}{{ mp.hodnoceniSoucet }}</td>
-                                    <td class="px-6 py-4">{{ mp.hodnoceniPrumer|number_format(2, ',', ' ') }}</td>
+                                    <td class="px-6 py-4">{{ hodnoceni.procenta(mp.hodnoceniProcenta) }}</td>
                                 </tr>
                             {% endfor %}
 
