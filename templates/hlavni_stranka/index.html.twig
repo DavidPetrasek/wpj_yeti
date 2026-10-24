@@ -3,6 +3,7 @@
 {% block title %}Best of Yeti{% endblock %}
 
 {% block main %}
+
     <section class="mx-auto max-w-6xl px-5 py-12 sm:px-8">
         <div class="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
             <div>
@@ -14,7 +15,9 @@
         </div>
 
         <div class="mt-9 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/20">
+            
             {% if nejlepsiYeti is not empty %}
+            
                 <div class="overflow-x-auto">
                     <table class="w-full min-w-[42rem] text-left text-sm">
                         <thead class="bg-slate-950/40 text-xs uppercase tracking-wider text-slate-500">
@@ -37,22 +40,27 @@
                                     <td class="px-6 py-4">{{ prehled.yeti.vaha }} kg</td>
                                     <td class="px-6 py-4">{{ prehled.yeti.bydliste }}</td>
                                     <td class="px-6 py-4">
-                                        <span class="font-semibold text-amber-200">★ {{ prehled.prumerneHodnoceni|number_format(2, ',', ' ') }}</span>
-                                        <span class="ml-1 text-xs text-slate-500">({{ prehled.pocetHodnoceni }})</span>
+                                        <span class="font-semibold text-amber-200">★ {{ prehled.hodnoceniPrumer|number_format(2, ',', ' ') }}</span>
+                                        <span class="ml-1 text-xs text-slate-500">({{ prehled.hodnoceniPocet }})</span>
                                     </td>
                                 </tr>
                             {% endfor %}
                         </tbody>
                     </table>
                 </div>
+
             {% else %}
+
                 <div class="px-6 py-16 text-center">
                     <span class="text-5xl" aria-hidden="true">❄️</span>
                     <h2 class="mt-5 text-2xl font-bold text-white">Žebříček zatím čeká na prvního Yetiho</h2>
                     <p class="mx-auto mt-3 max-w-md text-slate-400">Přidejte prvního obyvatele hor a odstartujte soutěž o nejlepšího Yetiho.</p>
                     <a href="{{ path('pridani_yetiho') }}" class="mt-6 inline-flex rounded-full border border-white/15 px-5 py-2.5 font-medium text-white transition hover:bg-white/10">Přidat prvního Yetiho</a>
                 </div>
+
             {% endif %}
+
         </div>
     </section>
+
 {% endblock %}

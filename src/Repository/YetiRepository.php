@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Repository;
 
@@ -30,13 +28,12 @@ class YetiRepository extends ServiceEntityRepository
             ->groupBy('y.id')
             ->orderBy('prumer', 'DESC')
             ->addOrderBy('pocet', 'DESC')
-            ->addOrderBy('y.jmeno', 'ASC')
             ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult();
+            ->getQuery()->getResult();
 
         return array_map(
-            static fn (array $row): YetiPrehled => new YetiPrehled(
+            static fn (array $row): YetiPrehled => new YetiPrehled
+            (
                 $row[0],
                 (float) $row['prumer'],
                 (int) $row['pocet'],

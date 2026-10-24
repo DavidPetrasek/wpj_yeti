@@ -16,7 +16,7 @@ registerControllers(
   })
 )
 
-stimulusApp.debug = true;
+stimulusApp.debug = false;
 stimulusApp.register('live', LiveControllerDefault);
 Turbo.config.forms.mode = 'off';
 

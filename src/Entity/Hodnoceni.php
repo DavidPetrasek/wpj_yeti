@@ -1,10 +1,9 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Entity;
 
 use App\Repository\HodnoceniRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: HodnoceniRepository::class)]
@@ -13,14 +12,14 @@ class Hodnoceni
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(options:['unsigned' => true])]
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'hodnoceni')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Yeti $yeti = null;
 
-    #[ORM\Column(type: 'smallint')]
+    #[ORM\Column(type: Types::SMALLINT)]
     private int $hodnota;
 
     #[ORM\Column]

@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Form;
 
@@ -24,7 +22,7 @@ class YetiFormType extends AbstractType
             ->add('jmeno', TextType::class, [
                 'label' => 'Jméno Yetiho',
                 'attr' => ['placeholder' => 'Například Sněžný Hubert'],
-                // 'empty_data' => '',
+                'empty_data' => '',
                 'constraints' => [
                     new Assert\NotBlank(message: 'Vyplňte jméno Yetiho.'),
                     new Assert\Length(max: 120),
@@ -42,7 +40,7 @@ class YetiFormType extends AbstractType
             ->add('vyska', IntegerType::class, [
                 'label' => 'Výška (cm)',
                 'attr' => ['min' => 1, 'placeholder' => '230'],
-                // 'empty_data' => 0,
+                'empty_data' => 0,
                 'constraints' => [
                     new Assert\NotBlank(message: 'Vyplňte výšku.'),
                     new Assert\Positive(message: 'Výška musí být kladné číslo.'),
@@ -51,7 +49,7 @@ class YetiFormType extends AbstractType
             ->add('vaha', IntegerType::class, [
                 'label' => 'Váha (kg)',
                 'attr' => ['min' => 1, 'placeholder' => '180'],
-                // 'empty_data' => 0,
+                'empty_data' => 0,
                 'constraints' => [
                     new Assert\NotBlank(message: 'Vyplňte váhu.'),
                     new Assert\Positive(message: 'Váha musí být kladné číslo.'),
@@ -60,7 +58,7 @@ class YetiFormType extends AbstractType
             ->add('bydliste', TextType::class, [
                 'label' => 'Kde bydlí',
                 'attr' => ['placeholder' => 'Například Krkonoše'],
-                // 'empty_data' => '',
+                'empty_data' => '',
                 'constraints' => [
                     new Assert\NotBlank(message: 'Vyplňte bydliště.'),
                     new Assert\Length(max: 120),
@@ -70,6 +68,9 @@ class YetiFormType extends AbstractType
                 'label' => 'Něco o něm',
                 'required' => false,
                 'attr' => ['rows' => 4, 'placeholder' => 'Zájmy, povaha nebo oblíbené místo...'],
+                'constraints' => [
+                    new Assert\Length(max: 500),
+                ],
             ])
             ->add('ulozit', SubmitType::class, [
                 'label' => 'Přidat Yetiho',

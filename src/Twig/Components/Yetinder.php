@@ -12,8 +12,8 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
-#[AsLiveComponent(name: 'yetinder', template: 'components/yetinder.html.twig')]
-final class YetinderComponent
+#[AsLiveComponent]
+final class Yetinder
 {
     use DefaultActionTrait;
 
@@ -22,20 +22,20 @@ final class YetinderComponent
 
     private ?Yeti $nactenyYeti = null;
 
-    public function __construct(
+    public function __construct
+    (
         private YetiRepository $yetiRepository,
         private YetiService $yetiService,
-    ) {
-    }
+    ) 
+    {}
 
     #[ExposeInTemplate(name: 'yeti')]
     public function getYeti(): ?Yeti
     {
-        if (null === $this->yetiId) {
-            return null;
-        }
+        if (null === $this->yetiId) return null;
 
-        if (null === $this->nactenyYeti || $this->nactenyYeti->getId() !== $this->yetiId) {
+        if (null === $this->nactenyYeti || $this->nactenyYeti->getId() !== $this->yetiId) 
+        {
             $this->nactenyYeti = $this->yetiRepository->find($this->yetiId);
         }
 
@@ -47,9 +47,7 @@ final class YetinderComponent
     {
         $yeti = $this->getYeti();
 
-        if (null === $yeti) {
-            return;
-        }
+        if (null === $yeti) return;
 
         $this->yetiService->ohodnot($yeti, $hodnota);
         $dalsiYeti = $this->yetiService->vyberNahodneho($this->yetiId);

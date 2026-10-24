@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Controller;
 
@@ -17,7 +15,7 @@ final class StatistikaHodnoceniController extends AbstractController
         return $this->render('statistika_hodnoceni/index.html.twig', [
             'mesicniPrehled' => $statistikaHodnoceniService->mesicniPrehled(),
             'pocetYeti' => $statistikaHodnoceniService->pocetYeti(),
-            'pocetHodnoceni' => $statistikaHodnoceniService->pocetHodnoceni(),
+            'hodnoceniPocet' => $statistikaHodnoceniService->hodnoceniPocet(),
         ]);
     }
 }

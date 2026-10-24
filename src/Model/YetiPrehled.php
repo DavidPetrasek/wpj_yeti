@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Model;
 
@@ -10,8 +8,8 @@ final readonly class YetiPrehled
 {
     public function __construct(
         public Yeti $yeti,
-        public float $prumerneHodnoceni,
-        public int $pocetHodnoceni,
-    ) {
-    }
+        public float $hodnoceniPrumer,
+        public int $hodnoceniPocet,
+    ) 
+    {}
 }

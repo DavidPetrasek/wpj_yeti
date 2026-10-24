@@ -1,34 +1,42 @@
-{% if uspesneUlozeno %}
-    <div class="rounded-2xl border border-emerald-400/20 bg-emerald-400/10 p-6 text-emerald-100">
-        <h2 class="text-xl font-semibold">Yeti je úspěšně přidaný!</h2>
-        <p class="mt-2 text-sm text-emerald-100/75">Jeho profil se teď může objevit v žebříčku i v Yetinderu.</p>
-        <a href="{{ path('hlavni_stranka') }}" class="mt-5 inline-flex rounded-full bg-emerald-300 px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-emerald-200">Zobrazit žebříček</a>
-    </div>
-{% else %}
-    {{ form_start(form, {
-        attr: {
-            class: 'space-y-5',
-            'data-action': 'live#action:prevent',
-            'data-live-action-param': 'ulozit'
-        }
-    }) }}
-        <div class="grid gap-5 sm:grid-cols-2">
-            {% for field in [form.jmeno, form.pohlavi, form.vyska, form.vaha, form.bydliste] %}
-                <div class="space-y-2">
-                    {{ form_label(field, null, {label_attr: {class: 'block text-sm font-medium text-slate-200'}}) }}
-                    {{ form_widget(field, {attr: {class: 'w-full rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-cyan-300/60 focus:ring-2 focus:ring-cyan-300/10'}}) }}
-                    {{ form_errors(field) }}
+<div {{ attributes }}>
+
+    {% if uspesneUlozeno %}
+    
+        <div class="rounded-2xl border border-emerald-400/20 bg-emerald-400/10 p-6 text-emerald-100">
+            <h2 class="text-xl font-semibold">Yeti je úspěšně přidaný!</h2>
+            <p class="mt-2 text-sm text-emerald-100/75">Jeho profil se teď může objevit v žebříčku i v Yetinderu.</p>
+            <a href="{{ path('hlavni_stranka') }}" class="mt-5 inline-flex rounded-full bg-emerald-300 px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-emerald-200">Zobrazit žebříček</a>
+        </div>
+
+    {% else %}
+
+        {{ form_start(form, {
+            attr: {
+                class: 'space-y-5',
+                'data-action': 'live#action:prevent',
+                'data-live-action-param': 'ulozit'
+            }
+        }) }}
+            <div class="grid gap-5 sm:grid-cols-2">
+                {% for field in [form.jmeno, form.pohlavi, form.vyska, form.vaha, form.bydliste] %}
+                    <div class="space-y-2">
+                        {{ form_label(field, null, {label_attr: {class: 'block text-sm font-medium text-slate-200'}}) }}
+                        {{ form_widget(field, {attr: {class: 'w-full rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-cyan-300/60 focus:ring-2 focus:ring-cyan-300/10'}}) }}
+                        {{ form_errors(field) }}
+                    </div>
+                {% endfor %}
+                <div class="space-y-2 sm:col-span-2">
+                    {{ form_label(form.popis, null, {label_attr: {class: 'block text-sm font-medium text-slate-200'}}) }}
+                    {{ form_widget(form.popis, {attr: {class: 'w-full rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-cyan-300/60 focus:ring-2 focus:ring-cyan-300/10'}}) }}
+                    {{ form_errors(form.popis) }}
                 </div>
-            {% endfor %}
-            <div class="space-y-2 sm:col-span-2">
-                {{ form_label(form.popis, null, {label_attr: {class: 'block text-sm font-medium text-slate-200'}}) }}
-                {{ form_widget(form.popis, {attr: {class: 'w-full rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-cyan-300/60 focus:ring-2 focus:ring-cyan-300/10'}}) }}
-                {{ form_errors(form.popis) }}
             </div>
-        </div>
-        {{ form_errors(form) }}
-        <div class="pt-2">
-            {{ form_widget(form.ulozit, {attr: {class: 'cursor-pointer rounded-full bg-cyan-300 px-6 py-3 font-semibold text-slate-950 transition hover:bg-cyan-200'}}) }}
-        </div>
-    {{ form_end(form) }}
-{% endif %}
+            {{ form_errors(form) }}
+            <div class="pt-2">
+                {{ form_widget(form.ulozit, {attr: {class: 'cursor-pointer rounded-full bg-cyan-300 px-6 py-3 font-semibold text-slate-950 transition hover:bg-cyan-200'}}) }}
+            </div>
+        {{ form_end(form) }}
+
+    {% endif %}
+
+</div>

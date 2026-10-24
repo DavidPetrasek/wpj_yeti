@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -8,6 +6,7 @@ use App\Model\Pohlavi;
 use App\Repository\YetiRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: YetiRepository::class)]
@@ -15,13 +14,13 @@ class Yeti
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(options:['unsigned' => true])]
     private ?int $id = null;
 
     #[ORM\Column(length: 120)]
     private string $jmeno = '';
 
-    #[ORM\Column(type: 'smallint', enumType: Pohlavi::class)]
+    #[ORM\Column(enumType: Pohlavi::class)]
     private ?Pohlavi $pohlavi = null;
 
     #[ORM\Column]
@@ -33,11 +32,11 @@ class Yeti
     #[ORM\Column(length: 120)]
     private string $bydliste = '';
 
-    #[ORM\Column(type: 'text', nullable: true)]
+    #[ORM\Column(type: Types::STRING, nullable: true, length: 500)]
     private ?string $popis = null;
 
     #[ORM\Column]
-    private \DateTimeImmutable $vytvorenoDatumCas;
+    private \DateTimeImmutable $datumVytvoreni;
 
     /**
      * @var Collection<int, Hodnoceni>
@@ -45,9 +44,10 @@ class Yeti
     #[ORM\OneToMany(targetEntity: Hodnoceni::class, mappedBy: 'yeti', orphanRemoval: true)]
     private Collection $hodnoceni;
 
+
     public function __construct()
     {
-        $this->vytvorenoDatumCas = new \DateTimeImmutable();
+        $this->datumVytvoreni = new \DateTimeImmutable();
         $this->hodnoceni = new ArrayCollection();
     }
 
@@ -64,18 +64,6 @@ class Yeti
     public function setJmeno(string $jmeno): static
     {
         $this->jmeno = $jmeno;
-
-        return $this;
-    }
-
-    public function getPohlavi(): ?Pohlavi
-    {
-        return $this->pohlavi;
-    }
-
-    public function setPohlavi(?Pohlavi $pohlavi): static
-    {
-        $this->pohlavi = $pohlavi;
 
         return $this;
     }
@@ -128,9 +116,9 @@ class Yeti
         return $this;
     }
 
-    public function getVytvorenoDatumCas(): \DateTimeImmutable
+    public function getDatumVytvoreni(): \DateTimeImmutable
     {
-        return $this->vytvorenoDatumCas;
+        return $this->datumVytvoreni;
     }
 
     /**
@@ -139,5 +127,17 @@ class Yeti
     public function getHodnoceni(): Collection
     {
         return $this->hodnoceni;
+    }
+
+    public function getPohlavi(): ?Pohlavi
+    {
+        return $this->pohlavi;
+    }
+
+    public function setPohlavi(Pohlavi $pohlavi): static
+    {
+        $this->pohlavi = $pohlavi;
+
+        return $this;
     }
 }

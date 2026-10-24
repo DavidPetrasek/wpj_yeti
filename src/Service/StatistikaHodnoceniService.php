@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Service;
 
@@ -23,7 +21,8 @@ final class StatistikaHodnoceniService
     {
         $mesice = [];
 
-        foreach ($this->hodnoceniRepository->findBy([], ['datumHodnoceni' => 'DESC']) as $hodnoceni) {
+        foreach ($this->hodnoceniRepository->findBy([], ['datumHodnoceni' => 'DESC']) as $hodnoceni) 
+        {
             $mesic = $hodnoceni->getDatumHodnoceni()->format('Y-m');
             $mesice[$mesic] ??= ['pocet' => 0, 'soucet' => 0];
             ++$mesice[$mesic]['pocet'];
@@ -32,7 +31,8 @@ final class StatistikaHodnoceniService
 
         $prehled = [];
 
-        foreach (array_slice($mesice, 0, $pocetMesicu, true) as $mesic => $udaje) {
+        foreach (array_slice($mesice, 0, $pocetMesicu, true) as $mesic => $udaje) 
+        {
             $prehled[] = new MesicniStatistika($mesic, $udaje['pocet'], $udaje['soucet']);
         }
 
@@ -41,11 +41,11 @@ final class StatistikaHodnoceniService
 
     public function pocetYeti(): int
     {
-        return $this->yetiRepository->count([]);
+        return $this->yetiRepository->count();
     }
 
-    public function pocetHodnoceni(): int
+    public function hodnoceniPocet(): int
     {
-        return $this->hodnoceniRepository->count([]);
+        return $this->hodnoceniRepository->count();
     }
 }

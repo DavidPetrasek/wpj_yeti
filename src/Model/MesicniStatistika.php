@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Model;
 
@@ -8,17 +6,15 @@ final readonly class MesicniStatistika
 {
     public function __construct(
         public string $mesic,
-        public int $pocetHodnoceni,
-        public int $soucetHodnoceni,
-    ) {
-    }
+        public int $hodnoceniPocet,
+        public int $hodnoceniSoucet,
+    ) 
+    {}
 
-    public function getPrumerneHodnoceni(): float
+    public function getHodnoceniPrumer(): float
     {
-        if (0 === $this->pocetHodnoceni) {
-            return 0.0;
-        }
+        if (0 === $this->hodnoceniPocet) return 0.0;
 
-        return $this->soucetHodnoceni / $this->pocetHodnoceni;
+        return $this->hodnoceniSoucet / $this->hodnoceniPocet;
     }
 }

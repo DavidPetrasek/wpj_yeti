@@ -1,0 +1,7 @@
+@layer base
+{
+    form [id*="error"]
+    {
+        @apply text-red-600 font-semibold py-1;
+    }
+}

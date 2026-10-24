@@ -3,7 +3,9 @@
 {% block title %}Statistika hodnocení | Best of Yeti{% endblock %}
 
 {% block main %}
+
     <section class="mx-auto max-w-5xl px-5 py-12 sm:px-8">
+
         <p class="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-cyan-300">Čísla z našich hor</p>
         <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl">Statistika hodnocení</h1>
         <p class="mt-4 max-w-2xl leading-7 text-slate-400">Přehled měsíční aktivity a hlasů, kterými návštěvníci hodnotí naše Yetie.</p>
@@ -15,7 +17,7 @@
             </article>
             <article class="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
                 <p class="text-sm text-slate-400">Rozdaných hodnocení</p>
-                <p class="mt-2 text-4xl font-bold text-white">{{ pocetHodnoceni }}</p>
+                <p class="mt-2 text-4xl font-bold text-white">{{ hodnoceniPocet }}</p>
             </article>
         </div>
 
@@ -24,7 +26,9 @@
                 <h2 class="text-lg font-semibold text-white">Hodnocení po měsících</h2>
                 <p class="mt-1 text-sm text-slate-400">Počet hlasů a jejich průměrná hodnota v posledních 12 aktivních měsících.</p>
             </div>
+
             {% if mesicniPrehled is not empty %}
+
                 <div class="overflow-x-auto">
                     <table class="w-full min-w-[34rem] text-left text-sm">
                         <thead class="bg-slate-950/40 text-xs uppercase tracking-wider text-slate-500">
@@ -36,20 +40,28 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-white/5 text-slate-300">
-                            {% for mesic in mesicniPrehled %}
+                            
+                            {% for mp in mesicniPrehled %}
                                 <tr>
-                                    <th scope="row" class="px-6 py-4 font-medium text-white">{{ mesic.mesic }}</th>
-                                    <td class="px-6 py-4">{{ mesic.pocetHodnoceni }}</td>
-                                    <td class="px-6 py-4">{{ mesic.soucetHodnoceni > 0 ? '+' : '' }}{{ mesic.soucetHodnoceni }}</td>
-                                    <td class="px-6 py-4">{{ mesic.prumerneHodnoceni|number_format(2, ',', ' ') }}</td>
+                                    <th scope="row" class="px-6 py-4 font-medium text-white">{{ mp.mesic }}</th>
+                                    <td class="px-6 py-4">{{ mp.hodnoceniPocet }}</td>
+                                    <td class="px-6 py-4">{{ mp.hodnoceniSoucet > 0 ? '+' : '' }}{{ mp.hodnoceniSoucet }}</td>
+                                    <td class="px-6 py-4">{{ mp.hodnoceniPrumer|number_format(2, ',', ' ') }}</td>
                                 </tr>
                             {% endfor %}
+
                         </tbody>
                     </table>
                 </div>
+
             {% else %}
+
                 <p class="px-6 py-10 text-center text-slate-400">Statistika se zobrazí, jakmile někdo ohodnotí prvního Yetiho.</p>
+                
             {% endif %}
+
         </div>
+
     </section>
+
 {% endblock %}

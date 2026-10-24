@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Service;
 
@@ -11,11 +9,12 @@ use Doctrine\ORM\EntityManagerInterface;
 
 final class YetiService
 {
-    public function __construct(
+    public function __construct
+    (
         private YetiRepository $yetiRepository,
         private EntityManagerInterface $entityManager,
-    ) {
-    }
+    ) 
+    {}
 
     public function vyberNahodneho(?int $vyloucitId = null): ?Yeti
     {
@@ -24,9 +23,7 @@ final class YetiService
             static fn (Yeti $yeti): bool => $yeti->getId() !== $vyloucitId,
         ));
 
-        if ([] === $yeti) {
-            return null;
-        }
+        if ([] === $yeti) return null;
 
         return $yeti[random_int(0, count($yeti) - 1)];
     }
