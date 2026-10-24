@@ -1,7 +1,5 @@
 import { startStimulusApp, registerControllers } from "vite-plugin-symfony/stimulus/helpers";
 import * as Turbo from "@hotwired/turbo";
-// import ModalWindow from "@dpsys/stimulus-modal-window";
-// import AutoSubmit from "@stimulus-components/auto-submit";
 import LiveControllerDefault from "@symfony/ux-live-component";
 
 
@@ -18,10 +16,8 @@ registerControllers(
   })
 )
 
-stimulusApp.debug = false;
+stimulusApp.debug = true;
 stimulusApp.register('live', LiveControllerDefault);
-// stimulusApp.register('modal-window', ModalWindow);
-// stimulusApp.register('auto-submit', AutoSubmit);
 Turbo.config.forms.mode = 'off';
 
 // https://github.com/lhapaipai/symfony-vite-dev/issues/63

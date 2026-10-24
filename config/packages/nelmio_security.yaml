@@ -53,6 +53,8 @@ nelmio_security:
             # report-uri: '%router.request_context.base_url%/nelmio/csp/report'
             default-src:
                 - 'none'
+            script-src:
+                - 'strict-dynamic'
             style-src:
                 - 'self'
                 - https://www.gstatic.com https://fonts.googleapis.com                                # Google Fonts
@@ -79,13 +81,7 @@ nelmio_security:
                 - 'wss:'
             block-all-mixed-content: true # defaults to false, blocks HTTP content over HTTPS transport
             # upgrade-insecure-requests: true # defaults to false, upgrades HTTP requests to HTTPS transport
-
-when@prod:
-    nelmio_security:
-        csp:
-            enforce:
-                script-src:
-                    - 'strict-dynamic'
+                
 
 when@dev:
     nelmio_security:
@@ -94,6 +90,4 @@ when@dev:
                 img-src:
                     - https://127.0.0.1:5173
                 media-src:
-                    - https://127.0.0.1:5173
-                script-src:
                     - https://127.0.0.1:5173

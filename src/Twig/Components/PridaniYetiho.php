@@ -1,13 +1,11 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Twig\Components;
 
 use App\Entity\Yeti;
 use App\Form\YetiFormType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
@@ -15,8 +13,8 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
-#[AsLiveComponent(name: 'pridani_yetiho', template: 'components/pridani_yetiho.html.twig')]
-final class PridaniYetihoComponent
+#[AsLiveComponent]
+final class PridaniYetiho extends AbstractController
 {
     use ComponentWithFormTrait;
     use DefaultActionTrait;
@@ -24,15 +22,15 @@ final class PridaniYetihoComponent
     #[LiveProp]
     public bool $uspesneUlozeno = false;
 
-    public function __construct(
-        private FormFactoryInterface $formFactory,
+    public function __construct
+    (
         private EntityManagerInterface $entityManager,
-    ) {
-    }
+    ) 
+    {}
 
     protected function instantiateForm(): FormInterface
     {
-        return $this->formFactory->create(YetiFormType::class, new Yeti());
+        return $this->createForm(YetiFormType::class, new Yeti());
     }
 
     #[LiveAction]
